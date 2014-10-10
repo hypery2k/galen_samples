@@ -1,4 +1,4 @@
-package sample;
+package util.testng;
 
 import java.util.List;
 

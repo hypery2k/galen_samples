@@ -14,3 +14,11 @@ hs_err_pid*
 testng/test-output/*
 testng/.project
 testng/.settings/*
+testng/.classpath
+testng/logs/*
+
+junit/.project
+junit/.classpath
+junit/.settings/*
+junit/test-output/*
+junit/logs/*

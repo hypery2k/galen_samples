@@ -11,4 +11,4 @@ css-hint-*      css    	div.bs-callout
 @ Code snippets should be vertical aligned | *
 --------------------------
 css-hint-*
-    component: calloutComponent.spec
+    component: shared/calloutComponent.spec

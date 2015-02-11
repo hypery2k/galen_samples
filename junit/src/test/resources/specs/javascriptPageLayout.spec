@@ -1,16 +1,15 @@
 @@ import shared/common.spec
 
 ==============================================================
-app-entry-*         css     a.list-group-item 
-app-entry-logo-*    css     a.list-group-item div.pull-left i.fa
-
+js-code-snippet-*      css    	div.bs-callout
 ==============================================================
 # common layout checks
 @@ import shared/commonLayout.spec
 
 # concrete layout tests
 
-@ Each app entry should have a logo| *
-[ 1 - 4 ]
-app-entry-logo-@
-    near: app-entry-@ -79 px left
+@ Code snippets should be vertical aligned | *
+--------------------------
+[ 1 - ${count("js-code-snippet-*")-1} ]
+js-code-snippet-*
+    aligned vertically left: js-code-snippet-@{+1}

@@ -43,7 +43,7 @@ public abstract class GalenBaseTest {
 
 	private WebDriver activeWebDriver;
 
-	private static final String ENV_URL = "https://martinreinhardt-online.de";
+  private static final String ENV_URL = "http://getbootstrap.com";
 
 	public void verifyPage(final String uri, final TestDevice pDevice,
 			final String specPath) throws Exception {

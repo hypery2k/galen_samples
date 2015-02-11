@@ -11,18 +11,18 @@ import sample.util.GalenBaseTest;
  * @author mreinhardt
  *
  */
-public class AppsLayoutTest extends GalenBaseTest {
+public class CssLayoutTest extends GalenBaseTest {
 	
 	/**
 	 * @param pTestDevice
 	 */
-	public AppsLayoutTest(TestDevice pTestDevice) {
+	public CssLayoutTest(TestDevice pTestDevice) {
 		super(pTestDevice);
 	}
 
 	@Test
 	public void shouldShowCorrectBaseLayout() throws Exception {
-		verifyPage("/#/apps","/specs/appsPageLayout.spec");
+		verifyPage("/css","/specs/cssPageLayout.spec");
 	}
 
 }

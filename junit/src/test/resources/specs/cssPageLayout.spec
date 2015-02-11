@@ -1,14 +1,14 @@
 @@ import shared/common.spec
 
 ==============================================================
-bootstrap-logo		css     span.bs-docs-booticon
+css-hint-*      css    	div.bs-callout
 ==============================================================
 # common layout checks
 @@ import shared/commonLayout.spec
 
 # concrete layout tests
 
-@ Bootstrap logo should be visible | *
+@ Code snippets should be vertical aligned | *
 --------------------------
-bootstrap-logo
-   visible
+css-hint-*
+    component: calloutComponent.spec

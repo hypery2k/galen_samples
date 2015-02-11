@@ -5,6 +5,7 @@ import static java.util.Arrays.asList;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -52,7 +53,7 @@ public abstract class GalenBaseTest extends TestCase {
 		this.device = pTestDevice;
 	}
 
-	private static final String ENV_URL = "https://martinreinhardt-online.de";
+	private static final String ENV_URL = "http://getbootstrap.com";
 
 	public void verifyPage(final String uri, final String specPath)
 	    throws Exception {
@@ -134,13 +135,13 @@ public abstract class GalenBaseTest extends TestCase {
 	@Parameters
 	public static Iterable<Object[]> devices() {
 		return Arrays.asList(new Object[][] {// @formatter:off
-		    { new TestDevice("small-phone", 	new Dimension( 280, 800), 	asList("small-phone",	"phone","mobile")) 	},
-		    { new TestDevice("normal-phone",	new Dimension( 320, 800), 	asList("normal-phone", 	"phone","mobile")) 	},
-		    { new TestDevice("big-phone", 		new Dimension( 380, 800), 	asList("big-phone",		"phone","mobile")) 	},
-		    { new TestDevice("small-tablet", 	new Dimension( 450, 800), 	asList("small-tablet", 	"tablet","mobile")) 	},
-		    { new TestDevice("normal-tablet", 	new Dimension( 450, 800), 	asList("normal-tablet",	"tablet","mobile")) 	},
-		    { new TestDevice("desktop", 		new Dimension(1024, 800), 	asList("desktop", 		"desktop")) },
-		    { new TestDevice("fullhd", 			new Dimension(1920,1080), 	asList("fullhd", 		"desktop")) },// @formatter:on
+		    { new TestDevice("small-phone", 	new Dimension( 280, 800), 	asList("small-phone",	  "phone",   "mobile"))  },
+		    { new TestDevice("normal-phone",	new Dimension( 320, 800), 	asList("normal-phone", 	"phone",   "mobile"))  },
+		    { new TestDevice("big-phone", 		new Dimension( 380, 800), 	asList("big-phone",		  "phone",   "mobile"))  },
+		    { new TestDevice("small-tablet", 	new Dimension( 450, 800), 	asList("small-tablet", 	"tablet",  "mobile"))  },
+		    { new TestDevice("normal-tablet", new Dimension( 450, 800), 	asList("normal-tablet",	"tablet",  "mobile"))  },
+		    { new TestDevice("desktop", 		  new Dimension(1024, 800), 	asList("desktop", 		             "desktop")) },
+		    { new TestDevice("fullhd", 			  new Dimension(1920,1080), 	asList("fullhd", 		               "desktop")) },// @formatter:on
 		    });
 	}
 

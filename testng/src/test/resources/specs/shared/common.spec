@@ -1,9 +1,7 @@
-
 ==============================================================
-
-navbar-top          css     .navbar-absolute-top
+navbar		      	css     .navbar-header
+navbar-item-*		css     .navbar-collapse .nav li 
 menubar-left        css     .sidebar-left
-content             css     .app-content
-scroll-content      css     .scrollable-content
-
+header             	css     .bs-docs-header
+content             css     .bs-docs-container
 ==============================================================

@@ -1,40 +1,33 @@
 @ Overall layout | *
 --------------------------
 content
-    visible
-navbar-top
-    visible
+   visible
+navbar
+   visible
+content
+   below: navbar 370 to 410 px
 
-
-@ Sidebar hidden on mobile | phone
+   	
+@ navigation hidden on mobile | mobile
 --------------------------
-menubar-left
-    on top left: navbar-top 0 px left, 0 px bottom
+navbar-item-*
+   absent
 
 
-@ Content should fit to screen size on mobile | phone
+@ navigation shown on desktop | desktop
+--------------------------
+navbar-item-*
+   visible   
+
+
+@ Content should fit to screen size | mobile
 --------------------------
 content
-    width: 100% of screen/width
-    below: navbar-top 0 px
-scroll-content
-    inside: content 0 px left
+   width: 100% of screen/width
+
+
+@ Content should fit to screen size | desktop
+--------------------------
+content
+   width: 80 to 90% of screen/width
     
-    
-@ Content use complete width on mobile | phone
---------------------------
-content
-    width: 100% of screen/width
-    
-@ Content use complete width on mobile | tablet
---------------------------
-content
-    width: 70 to 100% of screen/width
-    inside:screen 0px left
-
-
-@ Content use complete width on mobile | desktop
---------------------------
-content
-    width: 70 to 100% of screen/width
-    inside:screen 300 to 320 px left

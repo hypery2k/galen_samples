@@ -11,11 +11,11 @@ import util.testng.GalenBaseTest;
  * @author mreinhardt
  *
  */
-public class AppsLayoutTest extends GalenBaseTest {
+public class CssLayoutTest extends GalenBaseTest {
 
 	@Test(dataProvider = "devices")
 	public void shouldShowCorrectBaseLayout(final TestDevice device) throws Exception {
-		verifyPage("/#/apps",device,"/specs/appsPageLayout.spec");
+		verifyPage("/css",device,"/specs/cssPageLayout.spec");
 	}
 
 }

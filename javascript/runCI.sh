@@ -8,5 +8,5 @@ galen test . -DwebsiteUrl=${websiteUrl} --htmlreport ../../../reports/shopping-c
 cd ../..
 
 cd bootstrap
-galen test basic.test -DwebsiteUrl=${websiteUrl} --htmlreport ../../reports/bootstrap/local --testngreport ../../../reports/bootstrap/local/testng.xml -Dwebdriver.chrome.driver=/opt/dev/tools/chromedriver
-galen test saucelabs.test -DwebsiteUrl=${websiteUrl} --htmlreport ../../reports/bootstrap/saucelabs --testngreport ../../../reports/bootstrap/saucelabs/testng.xml
+galen test basic.test -DwebsiteUrl=${websiteUrl} --htmlreport ../../reports/bootstrap/local --testngreport ../../reports/bootstrap/local/testng.xml -Dwebdriver.chrome.driver=/opt/dev/tools/chromedriver
+galen test saucelabs.test -DwebsiteUrl=${websiteUrl} --htmlreport ../../reports/bootstrap/saucelabs --testngreport ../../reports/bootstrap/saucelabs/testng.xml

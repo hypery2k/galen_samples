@@ -1,0 +1,16 @@
+@@ set 
+    sauceKey        aff16b42-9c23-4cb6-adf7-38da9e02193a
+    sauceUser       galen_mreinhardt
+    gridLogin       ${sauceUser}:${sauceKey}
+    gridUrl         http://${gridLogin}@ondemand.saucelabs.com:80/wd/hub
+@@ table browsers
+    | browserName   | gridArgs                                                               |
+    | Safari on Mac | --browser "safari" --version 6   --dc.platform "OS X 10.8"             |
+    | Opera         | --browser "opera" --version 12   --dc.platform "Linux"                 |
+    | Firefox       | --browser "firefox" --version 34 --dc.platform "Linux"                 |
+    | Chrome        | --browser "chrome" --version 39 --dc.platform "Linux"                  |
+    | IE 11         | --browser "internet explorer" --version 11 --dc.platform "Windows 8.1" |
+@@ parameterized using browsers
+Home page on ${browserName} browser
+    selenium grid ${gridUrl} --page ${websiteUrl} ${gridArgs}
+        check specs/homePageLayout.spec --include "${device}"

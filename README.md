@@ -6,3 +6,4 @@ This project is used in order to demonstrate the features of [Galen Framework](h
 Here you find two sample projects:
 * Using [TestNG](testng)
 * Using [JUnit](junit)
+* Using [JavaScript](javascript)

@@ -22,3 +22,5 @@ junit/.classpath
 junit/.settings/*
 junit/test-output/*
 junit/logs/*
+
+reports/*

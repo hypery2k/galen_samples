@@ -10,6 +10,8 @@
     | Firefox       | --browser "firefox" --version 34 --dc.platform "Linux"                 |
     | Chrome        | --browser "chrome" --version 39 --dc.platform "Linux"                  |
     | IE 11         | --browser "internet explorer" --version 11 --dc.platform "Windows 8.1" |
+    | Mobile Safari iOS 7.0         | --browser "Safari" --dc.deviceName "iPhone Simulator" --dc.deviceOrientation "portrait" --dc.platformName "iOS" --dc.platformVersion "7.0" --dc.appiumVersion "1.4.3" |
+    | Mobile Chrome Android 5.0        | --browser "Chrome" --dc.deviceName "Android Emulator" --dc.deviceOrientation "portrait" --dc.platformName "Android" --dc.platformVersion "5.0" --dc.appiumVersion "1.4.3" |
 @@ parameterized using browsers
 Home page on ${browserName} browser
     selenium grid ${gridUrl} --page ${websiteUrl} ${gridArgs}

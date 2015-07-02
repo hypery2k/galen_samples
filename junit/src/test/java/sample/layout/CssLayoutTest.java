@@ -4,6 +4,7 @@
 package sample.layout;
 
 import org.junit.Test;
+import org.openqa.selenium.By;
 
 import sample.util.GalenBaseTest;
 
@@ -12,6 +13,8 @@ import sample.util.GalenBaseTest;
  *
  */
 public class CssLayoutTest extends GalenBaseTest {
+    
+  public final static String NAV_TYPOGRAPHY_BTN = "(//*[contains(@class,'bs-docs-sidenav')]/li/a)[3]";
 	
 	/**
 	 * @param pTestDevice
@@ -22,6 +25,7 @@ public class CssLayoutTest extends GalenBaseTest {
 
 	@Test
 	public void shouldShowCorrectBaseLayout() throws Exception {
+	  getDriver().findElement(By.xpath(NAV_TYPOGRAPHY_BTN)).click();
 		verifyPage("/css","/specs/cssPageLayout.spec");
 	}
 

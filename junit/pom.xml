@@ -5,7 +5,7 @@
 
 
     <groupId>martinreinhardt-online.de.demos</groupId>
-    <artifactId>galen-junit</artifactId>
+    <artifactId>galen-samples-junit</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 

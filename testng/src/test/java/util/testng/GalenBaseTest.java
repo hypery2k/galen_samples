@@ -9,13 +9,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 
-import net.mindengine.galen.api.Galen;
-import net.mindengine.galen.reports.GalenTestInfo;
-import net.mindengine.galen.reports.model.LayoutObject;
-import net.mindengine.galen.reports.model.LayoutReport;
-import net.mindengine.galen.reports.model.LayoutSection;
-import net.mindengine.galen.reports.model.LayoutSpec;
-
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -28,6 +21,13 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
+
+import net.mindengine.galen.api.Galen;
+import net.mindengine.galen.reports.GalenTestInfo;
+import net.mindengine.galen.reports.model.LayoutObject;
+import net.mindengine.galen.reports.model.LayoutReport;
+import net.mindengine.galen.reports.model.LayoutSection;
+import net.mindengine.galen.reports.model.LayoutSpec;
 
 /**
  * Base class for all Galen tests. <br>
@@ -85,10 +85,9 @@ public abstract class GalenBaseTest {
 					errorElementDetails.append("  Element: ").append(
 							layoutObject.getName());
 					for (LayoutSpec layoutSpec : layoutObject.getSpecs()) {
-						if (layoutSpec.getErrorMessages() != null
-								&& layoutSpec.getErrorMessages().size() > 0) {
+						if (layoutSpec.getErrors() != null	&& layoutSpec.getErrors().size() > 0) {
 							errorElementDetails.append(layoutSpec
-									.getErrorMessages().toString());
+									.getErrors().toString());
 							hasErrors = true;
 						}
 					}

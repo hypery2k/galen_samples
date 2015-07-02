@@ -5,17 +5,8 @@ import static java.util.Arrays.asList;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-
-import junit.framework.TestCase;
-import net.mindengine.galen.api.Galen;
-import net.mindengine.galen.reports.GalenTestInfo;
-import net.mindengine.galen.reports.model.LayoutObject;
-import net.mindengine.galen.reports.model.LayoutReport;
-import net.mindengine.galen.reports.model.LayoutSection;
-import net.mindengine.galen.reports.model.LayoutSpec;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.AfterClass;
@@ -29,6 +20,13 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import junit.framework.TestCase;
+import net.mindengine.galen.api.Galen;
+import net.mindengine.galen.reports.GalenTestInfo;
+import net.mindengine.galen.reports.model.LayoutObject;
+import net.mindengine.galen.reports.model.LayoutReport;
+import net.mindengine.galen.reports.model.LayoutSection;
+import net.mindengine.galen.reports.model.LayoutSpec;
 import sample.util.junit.GalenTestRunner;
 
 /**
@@ -88,8 +86,8 @@ public abstract class GalenBaseTest extends TestCase {
 					final StringBuffer errorElementDetails = new StringBuffer();
 					errorElementDetails.append("  Element: ").append(layoutObject.getName());
 					for (LayoutSpec layoutSpec : layoutObject.getSpecs()) {
-						if (layoutSpec.getErrorMessages() != null && layoutSpec.getErrorMessages().size() > 0) {
-							errorElementDetails.append(layoutSpec.getErrorMessages().toString());
+						if (layoutSpec.getErrors() != null && layoutSpec.getErrors().size() > 0) {
+							errorElementDetails.append(layoutSpec.getErrors().toString());
 							hasErrors = true;
 						}
 					}

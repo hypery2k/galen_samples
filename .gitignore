@@ -24,3 +24,6 @@ junit/test-output/*
 junit/logs/*
 
 reports/*
+
+javascript/testRunner/bootstrap/reports/*
+javascript/reports/*

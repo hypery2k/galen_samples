@@ -25,8 +25,9 @@ public class CssLayoutTest extends GalenBaseTest {
 
 	@Test
 	public void shouldShowCorrectBaseLayout() throws Exception {
+	  load("/css");
 	  getDriver().findElement(By.xpath(NAV_TYPOGRAPHY_BTN)).click();
-		verifyPage("/css","/specs/cssPageLayout.spec");
+		verifyPage("/specs/cssPageLayout.spec");
 	}
 
 }

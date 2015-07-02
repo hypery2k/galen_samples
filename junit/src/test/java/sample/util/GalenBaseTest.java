@@ -59,6 +59,11 @@ public abstract class GalenBaseTest extends TestCase {
 		load(uri);
 		checkLayout(specPath, name);
 	}
+  
+  public void verifyPage(final String specPath) throws Exception {
+    final String name = getCaller() + " on " + this.device;
+    checkLayout(specPath, name);
+  }
 
 	public void checkLayout(final String specPath, final String name)
 	    throws Exception {

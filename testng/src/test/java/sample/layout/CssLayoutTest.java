@@ -18,8 +18,9 @@ public class CssLayoutTest extends GalenBaseTest {
 
 	@Test(dataProvider = "devices")
 	public void shouldShowCorrectBaseLayout(final TestDevice device) throws Exception {
+	  load("/css");
 	  getDriver().findElement(By.xpath(NAV_TYPOGRAPHY_BTN)).click();
-		verifyPage("/css",device,"/specs/cssPageLayout.spec");
+		verifyPage(device,"/specs/cssPageLayout.spec");
 	}
 
 }

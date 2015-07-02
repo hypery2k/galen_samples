@@ -51,6 +51,12 @@ public abstract class GalenBaseTest {
 		load(uri);
 		checkLayout(specPath, pDevice, name);
 	}
+	
+  public void verifyPage(final TestDevice pDevice,
+      final String specPath) throws Exception {
+    final String name = getCaller() + " on " + pDevice;
+    checkLayout(specPath, pDevice, name);
+  }
 
 	public void load(final String uri) throws MalformedURLException {
 		final String env = System.getProperty("selenium.start_uri");

@@ -12,7 +12,7 @@ import sample.util.GalenBaseTest;
  * @author mreinhardt
  *
  */
-public class CssLayoutTest extends GalenBaseTest {
+public class GoogleLayoutTest extends GalenBaseTest {
     
   public final static String NAV_FORM_BTN = "(//*[contains(@class,'bs-docs-sidenav')]/li/a)[6]";
   
@@ -21,17 +21,20 @@ public class CssLayoutTest extends GalenBaseTest {
 	/**
 	 * @param pTestDevice
 	 */
-	public CssLayoutTest(TestDevice pTestDevice) {
+	public GoogleLayoutTest(TestDevice pTestDevice) {
 		super(pTestDevice);
 	}
+  
+  protected String getDefaultURL(){
+      return "https://google.com";
+  }
 
 	@Test
 	public void shouldShowCorrectBaseLayout() throws Exception {
-	  // or use verifyPage("/css","/specs/cssPageLayout.spec");
-	  load("/css/#forms");
-	  clickElement(By.xpath(NAV_FORM_BTN));
-    enterText(By.xpath(INPUT_EMAIL),"invalidEmail");
-		verifyPage("/specs/cssPageLayout.spec");
+	  load("/");
+    enterText(By.id("lst-ib"),"Galen Testing");
+    clickElement(By.xpath("//*[contains(@class,'lsb')]//button"));
+		verifyPage("/specs/googlePageLayout.spec");
 	}
 
 }

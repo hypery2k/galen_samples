@@ -12,15 +12,20 @@ import util.testng.GalenBaseTest;
  * @author mreinhardt
  *
  */
-public class CssLayoutTest extends GalenBaseTest {
+public class CssLayoutTest extends GalenBaseTest {    
     
-  public final static String NAV_TYPOGRAPHY_BTN = "(//*[contains(@class,'bs-docs-sidenav')]/li/a)[3]";
+  public final static String NAV_FORM_BTN = "(//*[contains(@class,'bs-docs-sidenav')]/li/a)[6]";
+    
+  public final static String INPUT_EMAIL = "//*[contains(@data-example-id,'basic-forms')]//input[contains(@type,'email')]";
+    
 
 	@Test(dataProvider = "devices")
 	public void shouldShowCorrectBaseLayout(final TestDevice device) throws Exception {
-	  load("/css");
-	  getDriver().findElement(By.xpath(NAV_TYPOGRAPHY_BTN)).click();
-		verifyPage(device,"/specs/cssPageLayout.spec");
+	    // or use verifyPage("/css","/specs/cssPageLayout.spec");
+	    load("/css/#forms");
+	    clickElement(By.xpath(NAV_FORM_BTN));
+	    enterText(By.xpath(INPUT_EMAIL),"invalidEmail");
+	    verifyPage(device, "/specs/cssPageLayout.spec");
 	}
 
 }

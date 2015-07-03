@@ -12,9 +12,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameters;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
@@ -38,6 +42,8 @@ import sample.util.junit.GalenTestRunner;
 @RunWith(value = GalenTestRunner.class)
 public abstract class GalenBaseTest extends TestCase {
 
+  private static final String ENV_URL = "http://getbootstrap.com";
+
 	private static final Logger LOG = LoggerFactory.getLogger("GalenBaseTest");
 
 	private static WebDriver WEBDRIVER;
@@ -50,15 +56,34 @@ public abstract class GalenBaseTest extends TestCase {
 		super();
 		this.device = pTestDevice;
 	}
-
-	private static final String ENV_URL = "http://getbootstrap.com";
-
-	public void verifyPage(final String uri, final String specPath)
-	    throws Exception {
-		final String name = getCaller() + " on " + this.device;
-		load(uri);
-		checkLayout(specPath, name);
+	
+	protected String getDefaultURL(){
+	    return ENV_URL;
 	}
+  
+  public WebElement scrollToElement(final By selector) throws MalformedURLException{
+      WebElement element = getDriver().findElement(selector);
+      String coordY = Integer.toString(element.getLocation().getY());
+      ((JavascriptExecutor) getDriver()).executeScript("window.scrollTo(0, "+coordY+")");
+      return element;
+  }
+  
+  public void clickElement(final By selector) throws MalformedURLException{      
+      WebElement element = scrollToElement(selector);
+      element.click();
+  }
+  
+  public void enterText(final By selector, final String text) throws MalformedURLException{    
+      WebElement element = scrollToElement(selector);
+      element.sendKeys(text);
+  }
+
+  public void verifyPage(final String uri, final String specPath)
+      throws Exception {
+    final String name = getCaller() + " on " + this.device;
+    load(uri);
+    checkLayout(specPath, name);
+  }
   
   public void verifyPage(final String specPath) throws Exception {
     final String name = getCaller() + " on " + this.device;
@@ -109,7 +134,7 @@ public abstract class GalenBaseTest extends TestCase {
 
 	public void load(final String uri) throws MalformedURLException {
 		final String env = System.getProperty("selenium.start_uri");
-		final String completeUrl = (StringUtils.isEmpty(env) ? ENV_URL : env) + uri;
+		final String completeUrl = (StringUtils.isEmpty(env) ? getDefaultURL() : env) + uri;
 		getDriver().get(completeUrl);
 	}
 

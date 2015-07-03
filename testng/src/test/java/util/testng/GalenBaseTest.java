@@ -10,8 +10,11 @@ import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -44,6 +47,28 @@ public abstract class GalenBaseTest {
 	private WebDriver activeWebDriver;
 
   private static final String ENV_URL = "http://getbootstrap.com";
+  
+  protected String getDefaultURL(){
+      return ENV_URL;
+  }
+  
+  public WebElement scrollToElement(final By selector) throws MalformedURLException{
+      WebElement element = getDriver().findElement(selector);
+      String coordY = Integer.toString(element.getLocation().getY());
+      ((JavascriptExecutor) getDriver()).executeScript("window.scrollTo(0, "+coordY+")");
+      return element;
+  }
+  
+  public void clickElement(final By selector) throws MalformedURLException{      
+      WebElement element = scrollToElement(selector);
+      element.click();
+  }
+  
+  public void enterText(final By selector, final String text) throws MalformedURLException{    
+      WebElement element = scrollToElement(selector);
+      element.sendKeys(text);
+  }
+
 
 	public void verifyPage(final String uri, final TestDevice pDevice,
 			final String specPath) throws Exception {
@@ -60,7 +85,7 @@ public abstract class GalenBaseTest {
 
 	public void load(final String uri) throws MalformedURLException {
 		final String env = System.getProperty("selenium.start_uri");
-		final String completeUrl = (StringUtils.isEmpty(env) ? ENV_URL : env)
+		final String completeUrl = (StringUtils.isEmpty(env) ? getDefaultURL() : env)
 				+ uri;
 		getDriver().get(completeUrl);
 	}

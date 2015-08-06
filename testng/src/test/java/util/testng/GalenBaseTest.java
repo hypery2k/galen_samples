@@ -25,12 +25,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 
-import net.mindengine.galen.api.Galen;
-import net.mindengine.galen.reports.GalenTestInfo;
-import net.mindengine.galen.reports.model.LayoutObject;
-import net.mindengine.galen.reports.model.LayoutReport;
-import net.mindengine.galen.reports.model.LayoutSection;
-import net.mindengine.galen.reports.model.LayoutSpec;
+import com.galenframework.api.Galen;
+import com.galenframework.reports.TestReport;
+import com.galenframework.reports.model.LayoutObject;
+import com.galenframework.reports.model.LayoutReport;
+import com.galenframework.reports.model.LayoutSection;
+import com.galenframework.reports.model.LayoutSpec;
+import com.galenframework.support.GalenReportsContainer;
+import com.galenframework.testng.GalenTestNgReportsListener;
 
 /**
  * Base class for all Galen tests. <br>
@@ -38,7 +40,7 @@ import net.mindengine.galen.reports.model.LayoutSpec;
  * To run with maven against Selenium grid use: <br>
  * mvn verify -Dselenium.grid=http://grid-ip:4444/wd/hub
  */
-@Listeners(value = GalenReportingListener.class)
+@Listeners(value = GalenTestNgReportsListener.class)
 public abstract class GalenBaseTest {
 
 	private static final Logger LOG = LoggerFactory
@@ -70,17 +72,15 @@ public abstract class GalenBaseTest {
   }
 
 
-	public void verifyPage(final String uri, final TestDevice pDevice,
-			final String specPath) throws Exception {
+	public void verifyPage(final String uri, final TestDevice pDevice, final String specPath, final List<String> groups) throws Exception {
 		final String name = getCaller() + " on " + pDevice;
 		load(uri);
-		checkLayout(specPath, pDevice, name);
+		checkLayout(specPath, pDevice, name, groups);
 	}
 	
-  public void verifyPage(final TestDevice pDevice,
-      final String specPath) throws Exception {
+  public void verifyPage(final TestDevice pDevice, final String specPath, final List<String> groups) throws Exception {
     final String name = getCaller() + " on " + pDevice;
-    checkLayout(specPath, pDevice, name);
+    checkLayout(specPath, pDevice, name, groups);
   }
 
 	public void load(final String uri) throws MalformedURLException {
@@ -91,7 +91,7 @@ public abstract class GalenBaseTest {
 	}
 
 	public void checkLayout(final String pSpecPath, final TestDevice pDevice,
-			final String pName) throws IOException, URISyntaxException {
+			final String pName, final List<String> groups) throws IOException, URISyntaxException {
 		final String fullSpecPath;
 		if (GalenBaseTest.class.getResource(pSpecPath) != null) {
 			fullSpecPath = GalenBaseTest.class.getResource(pSpecPath).toURI()
@@ -99,11 +99,11 @@ public abstract class GalenBaseTest {
 		} else {
 			fullSpecPath = pSpecPath;
 		}
-		GalenTestInfo test = GalenReportsContainer.get().registerTest(pName);
+		TestReport test = GalenReportsContainer.get().registerTest(pName, groups);
 		final LayoutReport layoutReport = Galen.checkLayout(getDriver(),
 				fullSpecPath, pDevice.getTags(), null, new Properties(), null);
 		layoutReport.setTitle(pName);
-		test.getReport().layout(layoutReport, pName);
+		test.layout(layoutReport, pName);
 		if (layoutReport.errors() > 0) {
 			final StringBuffer errorDetails = new StringBuffer();
 			for (LayoutSection layoutSection : layoutReport.getSections()) {

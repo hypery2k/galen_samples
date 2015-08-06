@@ -4,6 +4,8 @@
 package sample.layout;
 
 
+import java.util.Arrays;
+
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -28,7 +30,9 @@ public class GoogleLayoutTest extends GalenBaseTest {
 	  load("/");
     enterText(By.id("lst-ib"),"Galen Testing");
     clickElement(By.xpath("//*[contains(@class,'lsb')]//button"));
-		verifyPage(device, "/specs/googlePageLayout.spec");
+		verifyPage(device, 
+		        "/specs/googlePageLayout.spec", 
+		        Arrays.asList("Google"));
 	}
 
 }

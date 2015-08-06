@@ -138,8 +138,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>net.mindengine</groupId>
-            <artifactId>galen</artifactId>
+            <groupId>com.galenframework</groupId>
+            <artifactId>galen-java-support</artifactId>
+            <version>${galen.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.galenframework</groupId>
+            <artifactId>galen-core</artifactId>
             <version>${galen.version}</version>
             <scope>test</scope>
             <exclusions>
@@ -178,8 +184,8 @@
 
         <!-- testing dependency versions -->
         <junit.version>4.11</junit.version>
-        <galen.version>1.6.4</galen.version>
-        <selenium.version>2.44.0</selenium.version>
+        <galen.version>2.0.5</galen.version>
+        <selenium.version>2.47.1</selenium.version>
 
         <!-- Maven Plugins -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>

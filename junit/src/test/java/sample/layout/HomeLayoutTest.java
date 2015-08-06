@@ -3,6 +3,8 @@
  */
 package sample.layout;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import sample.util.GalenBaseTest;
@@ -22,7 +24,7 @@ public class HomeLayoutTest extends GalenBaseTest {
 
 	@Test
 	public void shouldShowCorrectBaseLayout() throws Exception {
-		verifyPage("/", "/specs/homePageLayout.spec");
+		verifyPage("/", "/specs/homePageLayout.spec", Arrays.asList("Homepage", "Bootstrap"));
 	}
 
 }

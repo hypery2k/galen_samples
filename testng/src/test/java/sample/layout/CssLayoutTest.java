@@ -3,6 +3,8 @@
  */
 package sample.layout;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -25,7 +27,9 @@ public class CssLayoutTest extends GalenBaseTest {
 	    load("/css/#forms");
 	    clickElement(By.xpath(NAV_FORM_BTN));
 	    enterText(By.xpath(INPUT_EMAIL),"invalidEmail");
-	    verifyPage(device, "/specs/cssPageLayout.spec");
+	    verifyPage(device, 
+	            "/specs/cssPageLayout.spec", 
+	            Arrays.asList("Css", "Bootstrap"));
 	}
 
 }

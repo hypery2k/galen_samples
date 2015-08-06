@@ -18,19 +18,20 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.galenframework.api.Galen;
+import com.galenframework.reports.TestReport;
+import com.galenframework.reports.model.LayoutObject;
+import com.galenframework.reports.model.LayoutReport;
+import com.galenframework.reports.model.LayoutSection;
+import com.galenframework.reports.model.LayoutSpec;
+import com.galenframework.support.GalenReportsContainer;
+
 import junit.framework.TestCase;
-import net.mindengine.galen.api.Galen;
-import net.mindengine.galen.reports.GalenTestInfo;
-import net.mindengine.galen.reports.model.LayoutObject;
-import net.mindengine.galen.reports.model.LayoutReport;
-import net.mindengine.galen.reports.model.LayoutSection;
-import net.mindengine.galen.reports.model.LayoutSpec;
 import sample.util.junit.GalenTestRunner;
 
 /**
@@ -78,19 +79,19 @@ public abstract class GalenBaseTest extends TestCase {
       element.sendKeys(text);
   }
 
-  public void verifyPage(final String uri, final String specPath)
+  public void verifyPage(final String uri, final String specPath, final List<String> groups)
       throws Exception {
     final String name = getCaller() + " on " + this.device;
     load(uri);
-    checkLayout(specPath, name);
+    checkLayout(specPath, name, groups);
   }
   
-  public void verifyPage(final String specPath) throws Exception {
+  public void verifyPage(final String specPath, final List<String> groups) throws Exception {
     final String name = getCaller() + " on " + this.device;
-    checkLayout(specPath, name);
+    checkLayout(specPath, name, groups);
   }
 
-	public void checkLayout(final String specPath, final String name)
+	public void checkLayout(final String specPath, final String name, final List<String> groups)
 	    throws Exception {
 		getDriver().manage().window().setSize(device.getScreenSize());
 		if (GalenBaseTest.class.getResource(specPath) != null) {
@@ -103,8 +104,8 @@ public abstract class GalenBaseTest extends TestCase {
 		    null,
 		    new Properties(), null);
 		layoutReport.setTitle(name);
-		GalenTestInfo test = GalenReportsContainer.get().registerTest(name);
-		test.getReport().layout(layoutReport, name);
+		TestReport test = GalenReportsContainer.get().registerTest(name, groups);
+		test.layout(layoutReport, name);
 		if (layoutReport.errors() > 0) {
 			final StringBuffer errorDetails = new StringBuffer();
 			for (LayoutSection layoutSection : layoutReport.getSections()) {

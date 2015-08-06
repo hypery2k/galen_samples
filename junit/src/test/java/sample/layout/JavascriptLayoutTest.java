@@ -3,6 +3,8 @@
  */
 package sample.layout;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import sample.util.GalenBaseTest;
@@ -22,7 +24,9 @@ public class JavascriptLayoutTest extends GalenBaseTest {
 
 	@Test
 	public void shouldShowCorrectBaseLayout() throws Exception {
-		verifyPage("/javascript","/specs/javascriptPageLayout.spec");
+		verifyPage("/javascript",
+		        "/specs/javascriptPageLayout.spec", 
+		        Arrays.asList("Javascript", "Bootstrap"));
 	}
 
 }

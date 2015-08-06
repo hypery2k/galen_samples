@@ -16,12 +16,14 @@ testng/.project
 testng/.settings/*
 testng/.classpath
 testng/logs/*
+testng/build/classes/*
 
 junit/.project
 junit/.classpath
 junit/.settings/*
 junit/test-output/*
 junit/logs/*
+junit/build/classes/*
 
 reports/*
 

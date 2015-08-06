@@ -1,15 +1,14 @@
-==============================================================
-search-input      id    	lst-ib
-search-results    id    	ires
-==============================================================
+
+@objects
+  search-input		#lst-ib
+  search-results    #ires
+  
 # concrete layout tests
 
-@ Search input visible | *
---------------------------
-search-input
+= Search input visible =
+search-input:
     visible
 
-@ Show search results | *
---------------------------
-search-results
+= Show search results =
+search-results:
     visible

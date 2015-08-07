@@ -12,8 +12,9 @@
 
 = Code snippets should be vertical aligned =
 
-  js-code-snippet-*:
-    aligned vertically left js-code-snippet-1
+  @forEach [js-code-snippet-*] as snippet, next as nextSnippet
+    ${snippet}:
+      aligned vertically left ${nextSnippet}
     
 = Ad should be centered =
 

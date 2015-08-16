@@ -1,4 +1,4 @@
-@import shared/common.spec
+@import shared/common.gspec
 
 @objects
   js-code-snippet-*		div.bs-callout
@@ -6,7 +6,7 @@
   ad					.carbonad
 
 # common layout checks
-@import shared/commonLayout.spec
+@import shared/commonLayout.gspec
 
 # concrete layout tests
 

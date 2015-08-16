@@ -23,12 +23,12 @@ public class CssLayoutTest extends GalenBaseTest {
 
 	@Test(dataProvider = "devices")
 	public void shouldShowCorrectBaseLayout(final TestDevice device) throws Exception {
-	    // or use verifyPage("/css","/specs/cssPageLayout.spec");
+	    // or use verifyPage("/css","/specs/cssPageLayout.gspec");
 	    load("/css/#forms");
 	    clickElement(By.xpath(NAV_FORM_BTN));
 	    enterText(By.xpath(INPUT_EMAIL),"invalidEmail");
 	    verifyPage(device, 
-	            "/specs/cssPageLayout.spec", 
+	            "/specs/cssPageLayout.gspec", 
 	            Arrays.asList("Css", "Bootstrap"));
 	}
 

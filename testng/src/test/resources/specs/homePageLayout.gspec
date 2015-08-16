@@ -1,10 +1,10 @@
-@import shared/common.spec
+@import shared/common.gspec
 
 @objects
   bootstrap-logo		span.bs-docs-booticon
   
 # common layout checks
-@import shared/commonLayout.spec
+@import shared/commonLayout.gspec
 
 # concrete layout tests
 

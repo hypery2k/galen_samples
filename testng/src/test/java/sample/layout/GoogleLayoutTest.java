@@ -31,7 +31,7 @@ public class GoogleLayoutTest extends GalenBaseTest {
     enterText(By.id("lst-ib"),"Galen Testing");
     clickElement(By.xpath("//*[contains(@class,'lsb')]//button"));
 		verifyPage(device, 
-		        "/specs/googlePageLayout.spec", 
+		        "/specs/googlePageLayout.gspec", 
 		        Arrays.asList("Google"));
 	}
 

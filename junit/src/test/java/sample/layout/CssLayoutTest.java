@@ -33,7 +33,7 @@ public class CssLayoutTest extends GalenBaseTest {
 	  load("/css/#forms");
 	  clickElement(By.xpath(NAV_FORM_BTN));
     enterText(By.xpath(INPUT_EMAIL),"invalidEmail");
-		verifyPage("/specs/cssPageLayout.spec", Arrays.asList("Css", "Bootstrap"));
+		verifyPage("/specs/cssPageLayout.gspec", Arrays.asList("Css", "Bootstrap"));
 	}
 
 }

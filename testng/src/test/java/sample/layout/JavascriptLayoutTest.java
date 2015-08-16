@@ -19,7 +19,7 @@ public class JavascriptLayoutTest extends GalenBaseTest {
 	public void shouldShowCorrectBaseLayout(final TestDevice device) throws Exception {
 	    verifyPage("/javascript", 
 	            device, 
-	            "/specs/javascriptPageLayout.spec", 
+	            "/specs/javascriptPageLayout.gspec", 
 	            Arrays.asList("Javascript", "Bootstrap"));
 	}
 

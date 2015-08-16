@@ -19,7 +19,7 @@ public class HomeLayoutTest extends GalenBaseTest {
 	public void shouldShowCorrectBaseLayout(final TestDevice device) throws Exception {
 		verifyPage("/", 
 		        device, 
-		        "/specs/homePageLayout.spec", 
+		        "/specs/homePageLayout.gspec", 
 		        Arrays.asList("Homepage", "Bootstrap"));
 	}
 

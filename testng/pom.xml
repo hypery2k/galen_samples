@@ -181,7 +181,7 @@
         
         <!-- testing dependency versions -->
         <testng.version>6.8.8</testng.version>
-        <galen.version>2.0.5</galen.version>
+        <galen.version>2.0.7</galen.version>
         <selenium.version>2.47.1</selenium.version>
 
         <!-- Maven Plugins -->

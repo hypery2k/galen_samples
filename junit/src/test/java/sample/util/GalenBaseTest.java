@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.galenframework.api.Galen;
+import com.galenframework.junit.GalenReportTestRunner;
 import com.galenframework.reports.TestReport;
 import com.galenframework.reports.model.LayoutObject;
 import com.galenframework.reports.model.LayoutReport;
@@ -32,7 +33,6 @@ import com.galenframework.reports.model.LayoutSpec;
 import com.galenframework.support.GalenReportsContainer;
 
 import junit.framework.TestCase;
-import sample.util.junit.GalenTestRunner;
 
 /**
  * Base class for all Galen tests. <br>
@@ -40,7 +40,7 @@ import sample.util.junit.GalenTestRunner;
  * To run with maven against Selenium grid use: <br>
  * mvn verify -Dselenium.grid=http://grid-ip:4444/wd/hub
  */
-@RunWith(value = GalenTestRunner.class)
+@RunWith(value = GalenReportTestRunner.class)
 public abstract class GalenBaseTest extends TestCase {
 
   private static final String ENV_URL = "http://getbootstrap.com";

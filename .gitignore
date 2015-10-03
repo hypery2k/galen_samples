@@ -29,3 +29,8 @@ reports/*
 
 javascript/testRunner/bootstrap/reports/*
 javascript/reports/*
+
+## IDEA
+.idea/*
+junit/*.iml
+testng/*.iml

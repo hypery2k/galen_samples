@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 
+import com.galenframework.specs.reader.page.SectionFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -90,7 +91,7 @@ public abstract class GalenBaseTest {
 		getDriver().get(completeUrl);
 	}
 
-	public void checkLayout(final String pSpecPath, final TestDevice pDevice,
+	public void checkLayout(final String pSpecPath, final TestDevice device,
 			final String pName, final List<String> groups) throws IOException, URISyntaxException {
 		final String fullSpecPath;
 		if (GalenBaseTest.class.getResource(pSpecPath) != null) {
@@ -100,8 +101,8 @@ public abstract class GalenBaseTest {
 			fullSpecPath = pSpecPath;
 		}
 		TestReport test = GalenReportsContainer.get().registerTest(pName, groups);
-		final LayoutReport layoutReport = Galen.checkLayout(getDriver(),
-				fullSpecPath, pDevice.getTags(), null, new Properties(), null);
+		LayoutReport layoutReport = Galen.checkLayout(getDriver(), fullSpecPath, new SectionFilter(device.getTags(),null),
+				new Properties(), null,null);
 		layoutReport.setTitle(pName);
 		test.layout(layoutReport, pName);
 		if (layoutReport.errors() > 0) {
@@ -124,7 +125,7 @@ public abstract class GalenBaseTest {
 					}
 					if (hasErrors) {
 						errorDetails.append("ViewPort Details: ")
-								.append(pDevice).append("\n");
+								.append(device).append("\n");
 						errorDetails.append(layoutDetails);
 						errorDetails.append(errorElementDetails).append("\n");
 					}

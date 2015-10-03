@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+import com.galenframework.specs.reader.page.SectionFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
@@ -100,9 +101,8 @@ public abstract class GalenBaseTest extends TestCase {
 			this.fullSpecPath = specPath;
 		}
 		LOG.info("Running Galen check layout");
-		LayoutReport layoutReport = Galen.checkLayout(getDriver(), fullSpecPath, device.getTags(),
-		    null,
-		    new Properties(), null);
+		LayoutReport layoutReport = Galen.checkLayout(getDriver(), fullSpecPath, new SectionFilter(device.getTags(),null),
+		   new Properties(), null,null);
 		layoutReport.setTitle(name);
 		TestReport test = GalenReportsContainer.get().registerTest(name, groups);
 		test.layout(layoutReport, name);

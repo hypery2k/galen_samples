@@ -2,19 +2,19 @@
 
   content:
     visible
-  navbar:
+  navbar.header:
    visible
   content:
-    below navbar 370 to 410 px
+    below navbar
 
   = navigation =
   
    @on mobile
-     navigation-item-*:
+     navbar.item-*:
        absent
   
    @on deskop
-     navigation-item-*:
+     navbar.item-*:
        visible  
       
   = Content should fit to screen size =

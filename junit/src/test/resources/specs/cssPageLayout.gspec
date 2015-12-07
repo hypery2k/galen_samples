@@ -8,6 +8,6 @@
 
 # concrete layout tests
 
-= Code snippets should be vertical aligned =
+= code snippets should render correct =
 css-hint-*:
     component shared/calloutComponent.gspec

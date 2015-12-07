@@ -13,7 +13,7 @@
      navbar.item-*:
        absent
   
-   @on deskop
+   @on desktop
      navbar.item-*:
        visible  
       
@@ -23,7 +23,7 @@
      content:
        width 100% of screen/width
   
-   @on deskop
+   @on desktop
      content:
        width 80 to 90% of screen/width 
     

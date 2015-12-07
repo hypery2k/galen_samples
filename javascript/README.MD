@@ -1,5 +1,15 @@
 # Galen samples for JavaScript
 
+
+## Setup
+
+```bash
+(sudo) npm install -g galenframework-cli
+
+```
+
+## Execution
+
 A showcase of JavaScript + Galen usage
 
 Jenkins Sample Build: [![Build Status](https://martinreinhardt-online.de/jenkins/buildStatus/icon?job=Galen_sample_JavaScript)](https://martinreinhardt-online.de/jenkins/view/Galen/job/Galen_sample_JavaScript/)

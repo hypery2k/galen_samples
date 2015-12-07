@@ -1,6 +1,13 @@
 package sample.util;
 
-import static java.util.Arrays.asList;
+import com.galenframework.junit.GalenJUnitTestBase;
+import com.galenframework.specs.reader.page.SectionFilter;
+import org.apache.commons.lang3.StringUtils;
+import org.junit.runners.Parameterized.Parameters;
+import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -8,32 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import com.galenframework.specs.reader.page.SectionFilter;
-import org.apache.commons.lang3.StringUtils;
-import org.junit.AfterClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized.Parameters;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.galenframework.api.Galen;
-import com.galenframework.junit.GalenReportTestRunner;
-import com.galenframework.reports.TestReport;
-import com.galenframework.reports.model.LayoutObject;
-import com.galenframework.reports.model.LayoutReport;
-import com.galenframework.reports.model.LayoutSection;
-import com.galenframework.reports.model.LayoutSpec;
-import com.galenframework.support.GalenReportsContainer;
-
-import junit.framework.TestCase;
+import static java.util.Arrays.asList;
 
 /**
  * Base class for all Galen tests. <br>
@@ -41,184 +23,125 @@ import junit.framework.TestCase;
  * To run with maven against Selenium grid use: <br>
  * mvn verify -Dselenium.grid=http://grid-ip:4444/wd/hub
  */
-@RunWith(value = GalenReportTestRunner.class)
-public abstract class GalenBaseTest extends TestCase {
+public abstract class GalenBaseTest extends GalenJUnitTestBase {
 
-  private static final String ENV_URL = "http://getbootstrap.com";
+    private static final String ENV_URL = "http://getbootstrap.com";
 
-	private static final Logger LOG = LoggerFactory.getLogger("GalenBaseTest");
+    private TestDevice device;
 
-	private static WebDriver WEBDRIVER;
+    public GalenBaseTest(final TestDevice pTestDevice) {
+        super();
+        this.device = pTestDevice;
+    }
 
-	private TestDevice device;
+    protected String getDefaultURL() {
+        return ENV_URL;
+    }
 
-	private String fullSpecPath;
+    public WebElement scrollToElement(final By selector) throws MalformedURLException {
+        WebElement element = getDriver().findElement(selector);
+        String coordY = Integer.toString(element.getLocation().getY());
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollTo(0, " + coordY + ")");
+        return element;
+    }
 
-	public GalenBaseTest(final TestDevice pTestDevice) {
-		super();
-		this.device = pTestDevice;
-	}
-	
-	protected String getDefaultURL(){
-	    return ENV_URL;
-	}
-  
-  public WebElement scrollToElement(final By selector) throws MalformedURLException{
-      WebElement element = getDriver().findElement(selector);
-      String coordY = Integer.toString(element.getLocation().getY());
-      ((JavascriptExecutor) getDriver()).executeScript("window.scrollTo(0, "+coordY+")");
-      return element;
-  }
-  
-  public void clickElement(final By selector) throws MalformedURLException{      
-      WebElement element = scrollToElement(selector);
-      element.click();
-  }
-  
-  public void enterText(final By selector, final String text) throws MalformedURLException{    
-      WebElement element = scrollToElement(selector);
-      element.sendKeys(text);
-  }
+    public void clickElement(final By selector) throws MalformedURLException {
+        WebElement element = scrollToElement(selector);
+        element.click();
+    }
 
-  public void verifyPage(final String uri, final String specPath, final List<String> groups)
-      throws Exception {
-    final String name = getCaller() + " on " + this.device;
-    load(uri);
-    checkLayout(specPath, name, groups);
-  }
-  
-  public void verifyPage(final String specPath, final List<String> groups) throws Exception {
-    final String name = getCaller() + " on " + this.device;
-    checkLayout(specPath, name, groups);
-  }
+    public void enterText(final By selector, final String text) throws MalformedURLException {
+        WebElement element = scrollToElement(selector);
+        element.sendKeys(text);
+    }
 
-	public void checkLayout(final String specPath, final String name, final List<String> groups)
-	    throws Exception {
-		getDriver().manage().window().setSize(device.getScreenSize());
-		if (GalenBaseTest.class.getResource(specPath) != null) {
-			this.fullSpecPath = GalenBaseTest.class.getResource(specPath).toURI().getPath();
-		} else {
-			this.fullSpecPath = specPath;
-		}
-		LOG.info("Running Galen check layout");
-		LayoutReport layoutReport = Galen.checkLayout(getDriver(), fullSpecPath, new SectionFilter(device.getTags(),null),
-		   new Properties(), null,null);
-		layoutReport.setTitle(name);
-		TestReport test = GalenReportsContainer.get().registerTest(name, groups);
-		test.layout(layoutReport, name);
-		if (layoutReport.errors() > 0) {
-			final StringBuffer errorDetails = new StringBuffer();
-			for (LayoutSection layoutSection : layoutReport.getSections()) {
-				final StringBuffer layoutDetails = new StringBuffer();
-				layoutDetails.append("\n").append("Layout Section: ").append(layoutSection.getName())
-				    .append("\n");
-				for (LayoutObject layoutObject : layoutSection.getObjects()) {
-					boolean hasErrors = false;
-					final StringBuffer errorElementDetails = new StringBuffer();
-					errorElementDetails.append("  Element: ").append(layoutObject.getName());
-					for (LayoutSpec layoutSpec : layoutObject.getSpecs()) {
-						if (layoutSpec.getErrors() != null && layoutSpec.getErrors().size() > 0) {
-							errorElementDetails.append(layoutSpec.getErrors().toString());
-							hasErrors = true;
-						}
-					}
-					if (hasErrors) {
-						errorDetails.append("Device Details: ").append(this.device).append("\n");
-						errorDetails.append(layoutDetails);
-						errorDetails.append(errorElementDetails).append("\n");
-					}
-				}
-			}
-			throw new RuntimeException(errorDetails.toString());
-		}
-	}
+    public void verifyPage(final String uri, final String specPath, final List<String> groups)
+            throws Exception {
+        // allow overwrite via parameters
+        final String env = System.getProperty("selenium.start_uri");
+        final String completeUrl = (StringUtils.isEmpty(env) ? getDefaultURL() : env) + uri;
+        load(completeUrl,
+                this.device.getScreenSize().getWidth(),
+                this.device.getScreenSize().getHeight());
+        checkLayout(specPath, new SectionFilter(device.getTags(), null),
+                new Properties(), null);
+    }
 
-	public void load(final String uri) throws MalformedURLException {
-		final String env = System.getProperty("selenium.start_uri");
-		final String completeUrl = (StringUtils.isEmpty(env) ? getDefaultURL() : env) + uri;
-		getDriver().get(completeUrl);
-	}
+    public void verifyPage(final String specPath, final List<String> groups)
+            throws Exception {
+        resize(this.device.getScreenSize().getWidth(), this.device.getScreenSize().getHeight());
+        checkLayout(specPath, new SectionFilter(device.getTags(), null),
+                new Properties(), null);
+    }
 
-	public WebDriver getDriver() throws MalformedURLException {
-		if (WEBDRIVER == null) {
-			final String grid = System.getProperty("selenium.grid");
-			if (grid == null) {
-				WEBDRIVER = new FirefoxDriver();
-			} else {
-				// chrome runs much faster in a selenium grid
-				WEBDRIVER = new RemoteWebDriver(new URL(grid), DesiredCapabilities.chrome());
-			}
-		}
-		return WEBDRIVER;
+    @Override
+    public void load(final String uri) {
+        final String env = System.getProperty("selenium.start_uri");
+        final String completeUrl = (StringUtils.isEmpty(env) ? getDefaultURL() : env) + uri;
+        getDriver().get(completeUrl);
+    }
 
-	}
+    @Override
+    public WebDriver createDriver() {
+        final String grid = System.getProperty("selenium.grid");
+        if (grid == null) {
+            return new FirefoxDriver();
+        } else {
+            // chrome runs much faster in a selenium grid
+            try {
+                return new RemoteWebDriver(new URL(grid), DesiredCapabilities.chrome());
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
-	@AfterClass
-	public static void quitDriver() throws MalformedURLException {
-		if (WEBDRIVER != null) {
-			WEBDRIVER.quit();
-			WEBDRIVER = null;
-		}
-	}
+    @Parameters
+    public static Iterable<Object[]> devices() {
+        return Arrays.asList(new Object[][]{// @formatter:off
+                {new TestDevice("small-phone", new Dimension(280, 800), asList("small-phone", "phone", "mobile"))},
+                {new TestDevice("normal-phone", new Dimension(320, 800), asList("normal-phone", "phone", "mobile"))},
+                {new TestDevice("big-phone", new Dimension(380, 800), asList("big-phone", "phone", "mobile"))},
+                {new TestDevice("small-tablet", new Dimension(450, 800), asList("small-tablet", "tablet", "mobile"))},
+                {new TestDevice("normal-tablet", new Dimension(450, 800), asList("normal-tablet", "tablet", "mobile"))},
+                {new TestDevice("desktop", new Dimension(1024, 800), asList("normal", "desktop"))},
+                {new TestDevice("fullhd", new Dimension(1920, 1080), asList("fullhd", "desktop"))},// @formatter:on
+        });
+    }
 
-	@Parameters
-	public static Iterable<Object[]> devices() {
-		return Arrays.asList(new Object[][] {// @formatter:off
-		    { new TestDevice("small-phone", 	new Dimension( 280, 800), 	asList("small-phone",	  "phone",   "mobile"))  },
-		    { new TestDevice("normal-phone",	new Dimension( 320, 800), 	asList("normal-phone", 	"phone",   "mobile"))  },
-		    { new TestDevice("big-phone", 		new Dimension( 380, 800), 	asList("big-phone",		  "phone",   "mobile"))  },
-		    { new TestDevice("small-tablet", 	new Dimension( 450, 800), 	asList("small-tablet", 	"tablet",  "mobile"))  },
-		    { new TestDevice("normal-tablet", new Dimension( 450, 800), 	asList("normal-tablet",	"tablet",  "mobile"))  },
-		    { new TestDevice("desktop", 		  new Dimension(1024, 800), 	asList("desktop", 		             "desktop")) },
-		    { new TestDevice("fullhd", 			  new Dimension(1920,1080), 	asList("fullhd", 		               "desktop")) },// @formatter:on
-		    });
-	}
+    public static class TestDevice {
 
-	private static String getCaller() throws ClassNotFoundException {
-		Throwable t = new Throwable();
-		StackTraceElement[] elements = t.getStackTrace();
-		String callerMethodName = elements[2].getMethodName();
-		String callerClassName = elements[2].getClassName();
-		return callerClassName + "->" + callerMethodName;
-	}
+        private final String name;
+        private final Dimension screenSize;
+        private final List<String> tags;
 
-	public static class TestDevice {
+        public TestDevice(String name, Dimension screenSize, List<String> tags) {
+            this.name = name;
+            this.screenSize = screenSize;
+            this.tags = tags;
+        }
 
-		private final String name;
-		private final Dimension screenSize;
-		private final List<String> tags;
+        public Dimension getScreenSize() {
+            return screenSize;
+        }
 
-		public TestDevice(String name, Dimension screenSize, List<String> tags) {
-			this.name = name;
-			this.screenSize = screenSize;
-			this.tags = tags;
-		}
+        public List<String> getTags() {
+            return tags;
+        }
 
-		public String getName() {
-			return name;
-		}
-
-		public Dimension getScreenSize() {
-			return screenSize;
-		}
-
-		public List<String> getTags() {
-			return tags;
-		}
-
-		/**
-		 * @see java.lang.Object#toString()
-		 */
-		@Override
-		public String toString() {
-			StringBuilder builder = new StringBuilder();
-			builder.append("TestDevice [");
-			if (name != null) {
-				builder.append("name=");
-				builder.append(name);
-			}
-			builder.append("]");
-			return builder.toString();
-		}
-	}
+        /**
+         * @see java.lang.Object#toString()
+         */
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append("TestDevice [");
+            if (name != null) {
+                builder.append("name=");
+                builder.append(name);
+            }
+            builder.append("]");
+            return builder.toString();
+        }
+    }
 }

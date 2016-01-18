@@ -32,5 +32,6 @@ javascript/reports/*
 
 ## IDEA
 .idea/*
+javascript/*.iml
 junit/*.iml
 testng/*.iml

@@ -184,8 +184,8 @@
 
         <!-- testing dependency versions -->
         <junit.version>4.11</junit.version>
-        <galen.version>2.2.0</galen.version>
-        <selenium.version>2.48.2</selenium.version>
+        <galen.version>2.2.4</galen.version>
+        <selenium.version>2.53.0</selenium.version>
 
         <!-- Maven Plugins -->
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>

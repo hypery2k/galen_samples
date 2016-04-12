@@ -1,7 +1,7 @@
 package sample.util;
 
 import com.galenframework.junit.GalenJUnitTestBase;
-import com.galenframework.specs.reader.page.SectionFilter;
+import com.galenframework.speclang2.pagespec.SectionFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.*;

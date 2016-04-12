@@ -2,12 +2,12 @@
 
 @objects
   css-hint-*	div.bs-callout
-	
+
 # common layout checks
 @import shared/commonLayout.gspec
 
 # concrete layout tests
 
-= Code snippets should be vertical aligned =
+= code snippets should render correct =
 css-hint-*:
     component shared/calloutComponent.gspec

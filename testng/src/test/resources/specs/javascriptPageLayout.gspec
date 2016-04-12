@@ -11,12 +11,10 @@
 # concrete layout tests
 
 = Code snippets should be vertical aligned =
-
-  @forEach [js-code-snippet-*] as snippet, next as nextSnippet
-    ${snippet}:
-      aligned vertically left ${nextSnippet}
+    @forEach [js-code-snippet-*] as snippet, next as nextSnippet
+        ${snippet}:
+            aligned vertically left ${nextSnippet}
     
 = Ad should be centered =
-
-  ad:
-    centered horizontally on ad-container
+    ad:
+        centered horizontally on ad-container

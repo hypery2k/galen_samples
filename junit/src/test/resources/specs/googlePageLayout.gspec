@@ -6,9 +6,9 @@
 # concrete layout tests
 
 = Search input visible =
-search-input:
-    visible
+    search-input:
+        visible
 
 = Show search results =
-search-results:
-    visible
+    search-results:
+        visible

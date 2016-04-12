@@ -4,7 +4,6 @@
   text-*	p
 		
 = callout = on phone device
-
   @on phone
     heading:
       inside parent 10px top left

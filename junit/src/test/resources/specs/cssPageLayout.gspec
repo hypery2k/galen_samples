@@ -2,7 +2,7 @@
 
 @objects
   css-hint-*	div.bs-callout
-	
+
 # common layout checks
 @import shared/commonLayout.gspec
 

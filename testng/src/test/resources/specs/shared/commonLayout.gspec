@@ -1,3 +1,5 @@
+@import galen-extras-rules.gspec
+
 = Overall layout =
 
   content:

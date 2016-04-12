@@ -9,6 +9,6 @@
 # concrete layout tests
 
 = Bootstrap logo should be visible =
-
-  bootstrap-logo:
-    visible
+    bootstrap-logo:
+        | should be squared
+        visible

@@ -57,10 +57,7 @@ public abstract class GalenBaseTest extends GalenJUnitTestBase {
 
     public void verifyPage(final String uri, final String specPath, final List<String> groups)
             throws Exception {
-        // allow overwrite via parameters
-        final String env = System.getProperty("selenium.start_uri");
-        final String completeUrl = (StringUtils.isEmpty(env) ? getDefaultURL() : env) + uri;
-        load(completeUrl,
+        load(uri,
                 this.device.getScreenSize().getWidth(),
                 this.device.getScreenSize().getHeight());
         checkLayout(specPath, new SectionFilter(device.getTags(), null),
@@ -76,6 +73,7 @@ public abstract class GalenBaseTest extends GalenJUnitTestBase {
 
     @Override
     public void load(final String uri) {
+        // allow overwrite via parameters
         final String env = System.getProperty("selenium.start_uri");
         final String completeUrl = (StringUtils.isEmpty(env) ? getDefaultURL() : env) + uri;
         getDriver().get(completeUrl);

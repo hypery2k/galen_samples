@@ -1,0 +1,20 @@
+{
+  "name": "gulp-galen-sample",
+  "version": "0.1.0",
+  "private": true,
+  "keywords": [
+    "gulp",
+    "galen"
+  ],
+  "author": {
+    "name": "Martin Reinhardt"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-galenframework": "^2.2.4"
+  },
+  "scripts": {
+    "test": "npm install && gulp test:galen"
+  }
+}

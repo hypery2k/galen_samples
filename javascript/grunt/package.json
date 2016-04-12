@@ -1,0 +1,22 @@
+{
+  "name": "grunt-galen-sample",
+  "version": "0.1.0",
+  "private": true,
+  "keywords": [
+    "grunt",
+    "galen"
+  ],
+  "author": {
+    "name": "Martin Reinhardt"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-galenframework": "^2.2.4",
+    "load-grunt-tasks": "^3.5.0"
+  },
+  "scripts": {
+    "test": "npm install && grunt"
+  }
+}

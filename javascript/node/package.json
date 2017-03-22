@@ -1,0 +1,15 @@
+{
+  "name": "galen_samples",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "galen": "galen"
+  },
+  "author": {
+    "name": "Martin Reinhardt"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "galenframework-cli": "2.3.2"
+  }
+}

@@ -1,0 +1,7 @@
+@objects
+    input              css      input[name=q]
+    submit             css      input[type=submit]
+
+= Main section =
+    input:
+        above submit

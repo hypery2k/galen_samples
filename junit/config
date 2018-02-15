@@ -31,7 +31,7 @@ galen.browser.screenshots.fullPage = true
 # Default browser
 # ~~~~~~~~~~~~~~~~~~~~~~~~
 # A browser that should be used by default in case it was not specified in galen test
-galen.default.browser=firefox
+galen.default.browser=chrome
 
 
 # Color scheme spec precision

@@ -27,7 +27,7 @@ public class CssLayoutTest extends GalenBaseTest {
 
     @Test
     public void shouldShowCorrectBaseLayout() throws Exception {
-        // or use verifyPage("/css","/specs/cssPageLayout.spec");
+        // or use verifyPage("/css","/specs/cssPageLayout.gspec");
         load("/css/#forms");
         clickElement(By.xpath(NAV_FORM_BTN));
         enterText(By.xpath(INPUT_EMAIL), "invalidEmail");

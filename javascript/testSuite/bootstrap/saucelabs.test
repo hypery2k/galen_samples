@@ -1,18 +1,18 @@
-@@ set 
+@@ set
     sauceKey        aff16b42-9c23-4cb6-adf7-38da9e02193a
     sauceUser       galen_mreinhardt
     gridLogin       ${sauceUser}:${sauceKey}
     gridUrl         http://${gridLogin}@ondemand.saucelabs.com:80/wd/hub
 @@ table browsers
     | browserName   | gridArgs                                                               |
-    | Safari on Mac | --browser "safari" --version 6   --dc.platform "OS X 10.8"             |
+    | Safari on Mac | --browser "safari" --version 8   --dc.platform "OS X 10.10"            |
     | Opera         | --browser "opera" --version 12   --dc.platform "Linux"                 |
     | Firefox       | --browser "firefox" --version 34 --dc.platform "Linux"                 |
     | Chrome        | --browser "chrome" --version 39 --dc.platform "Linux"                  |
     | IE 11         | --browser "internet explorer" --version 11 --dc.platform "Windows 8.1" |
-    | Mobile Safari iOS 7.0         | --browser "Safari" --dc.deviceName "iPhone Simulator" --dc.deviceOrientation "portrait" --dc.platformName "iOS" --dc.platformVersion "7.0" --dc.appiumVersion "1.4.3" |
-    | Mobile Chrome Android 5.0        | --browser "Chrome" --dc.deviceName "Android Emulator" --dc.deviceOrientation "portrait" --dc.platformName "Android" --dc.platformVersion "5.0" --dc.appiumVersion "1.4.3" |
+    | Mobile Safari iOS 10.0         | --browser "Safari" --dc.deviceName "iPhone Simulator" --dc.deviceOrientation "portrait" --dc.platformName "iOS" --dc.platformVersion "10.2" --dc.appiumVersion "1.7.1" |
+    | Mobile Chrome Android 6.0        | --browser "Chrome" --dc.deviceName "Android Emulator" --dc.deviceOrientation "portrait" --dc.platformName "Android" --dc.platformVersion "6.0" --dc.appiumVersion "1.7.1" |
 @@ parameterized using browsers
 Home page on ${browserName} browser
     selenium grid ${gridUrl} --page ${websiteUrl} ${gridArgs}
-        check specs/homePageLayout.spec --include "${device}"
+        check specs/homePageLayout.gspec --include "${device}"

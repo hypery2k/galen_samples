@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Properties;
 
-import com.galenframework.speclang2.pagespec.SectionFilter;
+import com.galenframework.gspeclang2.pagespec.SectionFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;

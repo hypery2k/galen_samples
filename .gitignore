@@ -32,6 +32,8 @@ javascript/reports/*
 javascript/node/*.log
 javascript/node/dist/
 javascript/node/node_modules/
+javascript/grunt/node_modules/
+javascript/gulp/node_modules/
 
 ## IDEA
 .idea/*
